@@ -1,4 +1,4 @@
-name = "nearest2"
+name = "nearest"
 main = "src/worker.js"
 compatibility_date = "2023-06-14"
 
