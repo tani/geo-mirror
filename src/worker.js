@@ -4,7 +4,12 @@
  * @returns Promise<string>
  */
 export async function getArchMirror(country) {
-    const src = await fetch('https://archlinux.org/mirrorlist/?ip_version=4').then(r => r.text())
+    const src = await fetch('https://archlinux.org/mirrorlist/?ip_version=4', {
+		  cf: {
+				cacheTtl: 3600, // 1 hour
+				cacheEverything: true
+			}
+		}).then(r => r.text())
     const re = /Server = (https?:\/\/.*)\/\$repo\/os\/\$arch/g
     const mirrors = {}
     let match
