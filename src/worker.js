@@ -30,6 +30,14 @@ export function getDebianMirror(country) {
     return Promise.resolve(`https://ftp.${country.toLowerCase()}.debian.org`)
 }
 
+/**
+ * getDebianMirror
+ * @param {string} country
+ * @returns Promise<string>
+ */
+export function getUbuntuMirror(country) {
+  return Promise.resolve(`https://${country.toLowerCase()}.archive.ubuntu.com`)
+}
 
 export default {
   /**
@@ -40,15 +48,18 @@ export default {
   async fetch(request) {
     const url = new URL(request.url);
     const country = /** @type {string} */ (request.cf.country);
+    const pathname =url.pathname.split('/').slice(2).join('/')
     if (url.pathname.startsWith('/archlinux')) {
-      const pathname =url.pathname.split('/').slice(2).join('/')
       const redirect = `${await getArchMirror(country)}/${pathname}`
       return Response.redirect(redirect);
     }
+    if (url.pathname.startsWith('/ubuntu')) {
+      const redirect = `${await getUbuntuMirror(country)}/${pathname}`
+      return Response.redirect(redirect)
+    }
     if (url.pathname.startsWith('/debian')) {
-      const pathname =url.pathname.split('/').slice(2).join('/')
       const redirect = `${await getDebianMirror(country)}/${pathname}`
-      return Response.redirect(await getDebianMirror(country));
+      return Response.redirect(redirect);
     }
   }
 };
