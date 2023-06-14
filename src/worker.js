@@ -61,5 +61,6 @@ export default {
       const redirect = `${await getDebianMirror(country)}/${pathname}`
       return Response.redirect(redirect);
     }
+		return Response.redirect('https://github.com/tani/geo-mirror')
   }
 };

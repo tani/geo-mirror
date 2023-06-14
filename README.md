@@ -1,4 +1,4 @@
-# NEAREST CASK
+# Geo Mirror
 
 This service redirects to the nearest mirror of a given distribution.
 
