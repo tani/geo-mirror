@@ -36,7 +36,7 @@ export function getDebianMirror(country) {
 }
 
 /**
- * getDebianMirror
+ * getUbuntuMirror
  * @param {string} country
  * @returns Promise<string>
  */
